@@ -109,8 +109,9 @@ exports.commands = {
 				confirm = true;
 				return this.sendReply('WARNING: This will permanently delete all tournament ladder ratings. If you\'re sure you want to do this, use this command again.');
 			}
-			require('fs').unlinkSync('config/ladders/tournaments.tsv');
+			confirm = false;
 			delete Ladders.ladderCaches['tournaments'];
+			require('fs').unlinkSync('config/ladders/tournaments.tsv');
 			Rooms('lobby').add('|html|<b>The Tournament Ladder has been reset.</b>');
 			Rooms('lobby').update();
 			if (room.id !== 'lobby') this.sendReply('The Tournament Ladder has been reset.');
